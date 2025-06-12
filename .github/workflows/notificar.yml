@@ -1,0 +1,18 @@
+name: Notificar cambio con curl
+
+on:
+  push:
+    branches:
+      - main  # o la rama que estés usando
+
+jobs:
+  notificar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enviar notificación a ntfy
+        run: |
+          curl -H "Title: Notificación de GitHub Actions" \
+               -H "Tags: github,rocket" \
+               -d "🚀 El usuario ha subido cambios al repositorio. Revisa el commit: https://github.com/${{ github.repository }}/commit/${{ github.sha }}" \
+               https://ntfy.sh/devops-itla
